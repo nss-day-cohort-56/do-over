@@ -143,13 +143,10 @@ for (const applicant of mortgageApplicants) {
     applicant,
     calculatedYearlyExpenses
   );
-  const qualifiedApplicant = isQualified(
-    applicant,
-    expensePercentageCalculated
-  );
+  isQualified(applicant, expensePercentageCalculated);
 
   console.log(`
-  ${qualifiedApplicant.name} is qualified for a maximum mortgage of $${qualifiedApplicant.mortgage.amount}
+  ${applicant.name} is qualified for a maximum mortgage of $${applicant.mortgage.amount}
   `);
 }
 
