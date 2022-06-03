@@ -13,16 +13,19 @@ const calculateExpensesPercentage = (applicant, calculatedYearlyExpenses) => {
   return calculatedExpensePercentage;
 };
 
-const isQualified = (applicant, calculatedExpensePercentage) => {
-  if (calculatedExpensePercentage < 10) {
-    applicant.mortgage.qualified = true;
-    applicant.mortgage.amount = applicant.salary * 5;
-  } else {
-    calculatedExpensePercentage > 10;
-    applicant.mortgage.qualified = false;
-    applicant.mortgage.amount = 0;
+const isQualified = (mortgageApplicants, calculatedExpensePercentage) => {
+  let qualifiedApplicants = [];
+  for (const applicant of mortgageApplicants) {
+    if (calculatedExpensePercentage < 10) {
+      applicant.mortgage.qualified = true;
+      applicant.mortgage.amount = applicant.salary * 5;
+    } else {
+      calculatedExpensePercentage > 10;
+      applicant.mortgage.qualified = false;
+      applicant.mortgage.amount = 0;
+    }
   }
-  return applicant;
+  return qualifiedApplicants;
 };
 
 const mortgageApplicants = [
