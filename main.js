@@ -137,9 +137,11 @@ for (const applicant of mortgageApplicants) {
   );
   const checkedApplicant = isQualified(applicant, calculatedExpensesPercentage);
   //   console.log(qualifiedApplicants);
-  console.log(`
-      ${checkedApplicant.name} is qualified for a maximum mortgage of $${checkedApplicant.mortgage.amount}
-      `);
+  if (checkedApplicant.mortgage.qualified) {
+    console.log(`
+          ${checkedApplicant.name} is qualified for a maximum mortgage of $${checkedApplicant.mortgage.amount}
+          `);
+  }
 }
 // **********  Do not touch this code  **********
 module.exports = {
