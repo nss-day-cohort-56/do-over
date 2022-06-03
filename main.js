@@ -17,14 +17,17 @@ const calculateExpensesPercentage = (
 };
 
 const isQualified = (mortgageApplicants, calculatedExpensePercentage) => {
+  let qualifiedApplicants = [];
   if (calculatedExpensePercentage < 10) {
     mortgageApplicants.mortgage.qualified = true;
     mortgageApplicants.mortgage.amount = mortgageApplicants.salary * 5;
-  } else if (calculatedExpensePercentage > 10) {
+    qualifiedApplicants.push(mortgageApplicants);
+  } else {
+    calculatedExpensePercentage > 10;
     mortgageApplicants.mortgage.qualified = false;
     mortgageApplicants.mortgage.amount = 0;
   }
-  return mortgageApplicants;
+  return qualifiedApplicants;
 };
 
 const mortgageApplicants = [
