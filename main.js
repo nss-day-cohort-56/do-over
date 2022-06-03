@@ -2,31 +2,6 @@
     Remember to use comments to define the algorithm(s) needed
     BEFORE you write any code
 */
-const calculateYearlyExpenses = (applicant) => {
-  const calculatedYearlyExpenses = applicant.monthlyExpenses * 12;
-  return calculatedYearlyExpenses;
-};
-
-const calculateExpensesPercentage = (applicant, calculatedYearlyExpenses) => {
-  const calculatedExpensePercentage =
-    (calculatedYearlyExpenses / applicant.salary) * 100;
-  return calculatedExpensePercentage;
-};
-
-const isQualified = (mortgageApplicants, calculatedExpensePercentage) => {
-  let qualifiedApplicants = [];
-  for (const applicant of mortgageApplicants) {
-    if (calculatedExpensePercentage < 10) {
-      applicant.mortgage.qualified = true;
-      applicant.mortgage.amount = applicant.salary * 5;
-    } else {
-      calculatedExpensePercentage > 10;
-      applicant.mortgage.qualified = false;
-      applicant.mortgage.amount = 0;
-    }
-  }
-  return qualifiedApplicants;
-};
 
 const mortgageApplicants = [
   {
@@ -130,25 +105,42 @@ const mortgageApplicants = [
   },
 ];
 
+const calculateYearlyExpenses = (applicant) => {
+  const calculatedYearlyExpenses = applicant.monthlyExpenses * 12;
+  return calculatedYearlyExpenses;
+};
+const calculateExpensesPercentage = (applicant, calculatedYearlyExpenses) => {
+  const calculatedExpensePercentage =
+    (calculatedYearlyExpenses / applicant.salary) * 100;
+  return calculatedExpensePercentage;
+};
+const isQualified = (applicant, calculatedExpensePercentage) => {
+  if (calculatedExpensePercentage < 10) {
+    applicant.mortgage.qualified = true;
+    applicant.mortgage.amount = applicant.salary * 5;
+  } else {
+    applicant.mortgage.qualified = false;
+    applicant.mortgage.amount = 0;
+  }
+
+  return applicant;
+};
 /*
     Iterate the array of mortgage applicants and use your
     functions to determine if they are qualified for a mortgage
 */
-
 for (const applicant of mortgageApplicants) {
   const calculatedYearlyExpenses = calculateYearlyExpenses(applicant);
-  const expensePercentageCalculated = calculateExpensesPercentage(
+  const calculatedExpensesPercentage = calculateExpensesPercentage(
     applicant,
     calculatedYearlyExpenses
   );
-  const qualified = isQualified(applicant, expensePercentageCalculated);
-
+  const checkedApplicant = isQualified(applicant, calculatedExpensesPercentage);
   //   console.log(qualifiedApplicants);
   console.log(`
-      ${applicant.name} is qualified for a maximum mortgage of $${applicant.mortgage.amount}
+      ${checkedApplicant.name} is qualified for a maximum mortgage of $${checkedApplicant.mortgage.amount}
       `);
 }
-
 // **********  Do not touch this code  **********
 module.exports = {
   calculateYearlyExpenses,
