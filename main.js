@@ -2,32 +2,27 @@
     Remember to use comments to define the algorithm(s) needed
     BEFORE you write any code
 */
-const calculateYearlyExpenses = (mortgageApplicants) => {
-  const calculatedYearlyExpenses = mortgageApplicants.monthlyExpenses * 12;
+const calculateYearlyExpenses = (applicant) => {
+  const calculatedYearlyExpenses = applicant.monthlyExpenses * 12;
   return calculatedYearlyExpenses;
 };
 
-const calculateExpensesPercentage = (
-  mortgageApplicants,
-  calculatedYearlyExpenses
-) => {
+const calculateExpensesPercentage = (applicant, calculatedYearlyExpenses) => {
   const calculatedExpensePercentage =
-    (calculatedYearlyExpenses / mortgageApplicants.salary) * 100;
+    (calculatedYearlyExpenses / applicant.salary) * 100;
   return calculatedExpensePercentage;
 };
 
-const isQualified = (mortgageApplicants, calculatedExpensePercentage) => {
-  let qualifiedApplicants = [];
+const isQualified = (applicant, calculatedExpensePercentage) => {
   if (calculatedExpensePercentage < 10) {
-    mortgageApplicants.mortgage.qualified = true;
-    mortgageApplicants.mortgage.amount = mortgageApplicants.salary * 5;
-    qualifiedApplicants.push(mortgageApplicants);
+    applicant.mortgage.qualified = true;
+    applicant.mortgage.amount = applicant.salary * 5;
   } else {
     calculatedExpensePercentage > 10;
-    mortgageApplicants.mortgage.qualified = false;
-    mortgageApplicants.mortgage.amount = 0;
+    applicant.mortgage.qualified = false;
+    applicant.mortgage.amount = 0;
   }
-  return qualifiedApplicants;
+  return applicant;
 };
 
 const mortgageApplicants = [
@@ -143,11 +138,12 @@ for (const applicant of mortgageApplicants) {
     applicant,
     calculatedYearlyExpenses
   );
-  isQualified(applicant, expensePercentageCalculated);
+  const qualified = isQualified(applicant, expensePercentageCalculated);
 
+  //   console.log(qualifiedApplicants);
   console.log(`
-  ${applicant.name} is qualified for a maximum mortgage of $${applicant.mortgage.amount}
-  `);
+      ${applicant.name} is qualified for a maximum mortgage of $${applicant.mortgage.amount}
+      `);
 }
 
 // **********  Do not touch this code  **********
